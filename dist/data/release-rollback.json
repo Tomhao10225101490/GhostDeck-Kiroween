@@ -1,0 +1,157 @@
+{
+  "title": "Release Rollback",
+  "description": "A fictional incident rehearsal: your team needs to decide whether to rollback a problematic production deployment or attempt an in-place fix.",
+  "cards": [
+    {
+      "id": "start",
+      "title": "Alert: High Error Rate",
+      "narrative": "It's 3:00 AM. Monitoring shows error rate spike to 45% across all services. The last deployment (v2.3.1) deployed at 22:00. Error traces point to the new payment validation service.",
+      "evidence": [
+        { "label": "Error Rate", "content": "45% across all services (threshold: 5%)" },
+        { "label": "Deployment Time", "content": "v2.3.1 deployed at 22:00" },
+        { "label": "Error Traces", "content": "Primary source: /api/v2/payments/validate" }
+      ],
+      "choices": [
+        { "label": "Rollback to v2.3.0", "destination": "rollback" },
+        { "label": "Investigate errors first", "destination": "investigate" }
+      ],
+      "isTerminal": false
+    },
+    {
+      "id": "rollback",
+      "title": "Rollback Decision",
+      "narrative": "You initiate rollback command. System begins restoring v2.3.0 from the last known good state. Rollback completes in 90 seconds.",
+      "evidence": [
+        { "label": "Rollback Duration", "content": "90 seconds to restore v2.3.0" },
+        { "label": "Error Reduction", "content": "Error rate drops to 2% immediately after rollback" },
+        { "label": "User Impact", "content": "Payment processing restored for 27,000 users" }
+      ],
+      "choices": [
+        { "label": "Verify stability", "destination": "verify-stable" },
+        { "label": "Notify stakeholders", "destination": "notify-stakeholders" }
+      ],
+      "isTerminal": false
+    },
+    {
+      "id": "investigate",
+      "title": "Investigating Errors",
+      "narrative": "You open the error logs and see repeated connection timeouts to the database. The new validation service uses a connection pool size of 200, but the database max connections is 150.",
+      "evidence": [
+        { "label": "Connection Pool", "content": "Pool size: 200, DB max: 150" },
+        { "label": "Timeout Errors", "content": "2,341 connection timeout errors in last 15 minutes" },
+        { "label": "Database CPU", "content": "CPU at 98%, connections at max capacity" }
+      ],
+      "choices": [
+        { "label": "Increase database max connections", "destination": "db-increase" },
+        { "label": "Reduce connection pool size", "destination": "pool-reduce" },
+        { "label": "Rollback anyway", "destination": "rollback" }
+      ],
+      "isTerminal": false
+    },
+    {
+      "id": "verify-stable",
+      "title": "Verification Complete",
+      "narrative": "All metrics normalized. Error rate at baseline, latency recovered. You schedule a post-mortem for tomorrow and update the incident status to resolved.",
+      "evidence": [
+        { "label": "Error Rate", "content": "0.3% (baseline)" },
+        { "label": "Latency", "content": "95th percentile: 142ms (normal)" },
+        { "label": "Incident Status", "content": "Resolved" }
+      ],
+      "choices": [],
+      "isTerminal": true
+    },
+    {
+      "id": "notify-stakeholders",
+      "title": "Stakeholder Notification",
+      "narrative": "You draft a message to engineering leadership, customer success, and support team leads. You document the rollback decision, timeline, and root cause preliminary findings.",
+      "evidence": [
+        { "label": "Notification Time", "content": "03:45 AM" },
+        { "label": "Affected Teams", "content": "Engineering, Customer Success, Support" },
+        { "label": "Root Cause (Preliminary)", "content": "Connection pool exhaustion in payment service" }
+      ],
+      "choices": [],
+      "isTerminal": true
+    },
+    {
+      "id": "db-increase",
+      "title": "Database Scaling",
+      "narrative": "You increase the database max connections to 300. The change requires a restart. While waiting for the restart, error rate continues to climb.",
+      "evidence": [
+        { "label": "Max Connections", "content": "Increased to 300" },
+        { "label": "Restart Required", "content": "Yes - planned maintenance window" },
+        { "label": "Error Trend", "content": "Climbing to 68%" }
+      ],
+      "choices": [
+        { "label": "Rollback during restart", "destination": "rollback" },
+        { "label": "Wait for restart", "destination": "db-wait" }
+      ],
+      "isTerminal": false
+    },
+    {
+      "id": "pool-reduce",
+      "title": "Connection Pool Fix",
+      "narrative": "You deploy a hotfix reducing the connection pool to 100. The change deploys in 12 seconds. Error rate drops to 8% within 2 minutes.",
+      "evidence": [
+        { "label": "Pool Size", "content": "Reduced to 100" },
+        { "label": "Deployment Time", "content": "12 seconds" },
+        { "label": "Error Reduction", "content": "8% after 2 minutes" }
+      ],
+      "choices": [
+        { "label": "Monitor briefly", "destination": "pool-monitor" },
+        { "label": "Call it done", "destination": "pool-complete" }
+      ],
+      "isTerminal": false
+    },
+    {
+      "id": "db-wait",
+      "title": "Database Restart",
+      "narrative": "The database restart begins. While waiting, you prepare rollback documentation and notify the on-call manager that the fix may take longer than expected.",
+      "evidence": [
+        { "label": "Restart Progress", "content": "Phase 2 of 3: Waiting for connections" },
+        { "label": "Estimated Completion", "content": "12 minutes remaining" },
+        { "label": "Backup Plan", "content": "Rollback ready if errors exceed 80%" }
+      ],
+      "choices": [
+        { "label": "Wait for restart", "destination": "db-wait-finish" },
+        { "label": "Initiate rollback", "destination": "rollback" }
+      ],
+      "isTerminal": false
+    },
+    {
+      "id": "db-wait-finish",
+      "title": "Restart Complete",
+      "narrative": "Database is back online with 300 max connections. Error rate drops to 3% over the next 5 minutes. The fix is stable.",
+      "evidence": [
+        { "label": "Connection Count", "content": "245 active (under 300 limit)" },
+        { "label": "Error Rate", "content": "3%" },
+        { "label": "Latency P95", "content": "284ms (degraded but acceptable)" }
+      ],
+      "choices": [],
+      "isTerminal": true
+    },
+    {
+      "id": "pool-monitor",
+      "title": "Monitoring Hotfix",
+      "narrative": "You watch the metrics for 15 minutes. Error rate stays at 2-3%. You prepare the incident report and schedule a follow-up review for the next day.",
+      "evidence": [
+        { "label": "Error Rate", "content": "2-3%" },
+        { "label": "Duration Monitored", "content": "15 minutes" },
+        { "label": "Incident Report", "content": "Draft completed" }
+      ],
+      "choices": [],
+      "isTerminal": true
+    },
+    {
+      "id": "pool-complete",
+      "title": "Fix Applied",
+      "narrative": "You mark the incident resolved. The fix reduces connection pool size permanently. You create a follow-up ticket to add connection pool monitoring alert.",
+      "evidence": [
+        { "label": "Incident Status", "content": "Resolved" },
+        { "label": "Permanent Change", "content": "Pool size set to 100" },
+        { "label": "Monitoring", "content": "Follow-up ticket created" }
+      ],
+      "choices": [],
+      "isTerminal": true
+    }
+  ]
+}

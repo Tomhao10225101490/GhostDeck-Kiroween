@@ -1,0 +1,1 @@
+{"name":"ghostdeck","version":"1.0.0","private":true,"type":"module","description":"HyperCard-inspired local decision rehearsals for Kiroween 2026","scripts":{"test":"node --test tests/*.test.js dist/js/engine.test.js","start":"python3 -m http.server 8768 --directory dist"},"license":"MIT"}

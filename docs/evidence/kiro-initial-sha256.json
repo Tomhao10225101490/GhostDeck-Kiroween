@@ -1,0 +1,15 @@
+{
+  "dist/index.html": "d2ebe570d85badb92dcbcb301c5e63525b0aacccd84412ce81345d0941ec6175",
+  "dist/css/style.css": "15b0715bb14a3d78cfaa58bcc4bc5f8656394dbd8919d0c919c24debe37931ff",
+  "dist/js/renderer.js": "5c4dd2e517aa6acc6e6e7162bd2a1aa84f983edb4628c95ca5264561b805b9a5",
+  "dist/js/engine.js": "7c33570a99f50eba5631283b0da4ce381263fb8d3e38ed0d46fbc64962a5fb2e",
+  "dist/js/app.js": "881521d4d2a8f815ddf9107390214e4e2959f5af8e85366b3ce8609b3bb8cfa3",
+  "dist/js/engine.test.js": "fb5cff6a2998956e2c9d487be7b11a9ee7f69dfb45ecb9fde9319df4d94b9d3f",
+  "dist/js/storage.js": "700f0f9d0b3c36510a48fb9a6d29e6f6ae49c9eb0392c46bd9defb9a52fc5744",
+  "dist/data/release-rollback.json": "156bc361356d3d50254e00336a7ed4868adcde1b65b122510080a21ddb13bdb4",
+  "dist/data/lost-badge.json": "6bfd7f65d688fd33c221d9f7325e35450a5d70e778ada5a96da26a47a78032ae",
+  ".kiro/specs/ghostdeck/requirements.md": "b18033f21bde4e974b014a31d3e266df2f8c43c4f76e74ed2e4f4cf27885f337",
+  ".kiro/specs/ghostdeck/tasks.md": "2aa23ee4dda630bd18ecce99f1854cadbb028187febd725ee816b14de847f740",
+  ".kiro/specs/ghostdeck/design.md": "9a58beafdb40ef7b44a1afad7b17e01025841a191f61f2d77faf19e6468f0934",
+  ".kiro/steering/product.md": "9f5dfb75db8b77a6dffcb1eaaebb22c10de78f73d35dfc3426ab520306acc03d"
+}

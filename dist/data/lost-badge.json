@@ -1,0 +1,160 @@
+{
+  "title": "Lost Badge Access",
+  "description": "A fictional access control rehearsal: an employee reports their security badge is lost after working late. The building's access control system shows unusual activity.",
+  "cards": [
+    {
+      "id": "start",
+      "title": "Lost Badge Report",
+      "narrative": "It's 11:30 PM. Maria from DevOps calls: she lost her badge after working late. She last had it in the server room at 10:45 PM. Security logs show badge scan at Server Room A at that time, then nothing.",
+      "evidence": [
+        { "label": "Last Scan", "content": "Server Room A - 10:45 PM" },
+        { "label": "Employee", "content": "Maria (DevOps, Level 3 clearance)" },
+        { "label": "Time Reported", "content": "11:30 PM" }
+      ],
+      "choices": [
+        { "label": "Disable badge immediately", "destination": "disable-badge" },
+        { "label": "Review security footage", "destination": "review-video" },
+        { "label": "Check last locations", "destination": "check-locations" }
+      ],
+      "isTerminal": false
+    },
+    {
+      "id": "disable-badge",
+      "title": "Badge Disabled",
+      "narrative": "You log into the access control system and disable Maria's badge (ID: DEV-4821). All electronic doors immediately reject the badge. Physical security teams are alerted.",
+      "evidence": [
+        { "label": "Badge Status", "content": "Disabled" },
+        { "label": "System Log", "content": "Disable initiated by security terminal 1" },
+        { "label": "Alerts Sent", "content": "Physical Security, Infrastructure" }
+      ],
+      "choices": [
+        { "label": "Wait for Maria", "destination": "wait-maria" },
+        { "label": "Issue temporary access", "destination": "temp-access" }
+      ],
+      "isTerminal": false
+    },
+    {
+      "id": "review-video",
+      "title": "Reviewing Surveillance",
+      "narrative": "You pull the server room camera feed. The footage shows Maria entering at 10:45 PM, working at her station, then leaving at 11:15 PM toward the elevator. She appears to have her badge.",
+      "evidence": [
+        { "label": "Exit Time", "content": "11:15 PM toward elevator" },
+        { "label": "Badge Visible", "content": "Yes - attached to lanyard" },
+        { "label": "Destination", "content": "Elevator B, ground floor" }
+      ],
+      "choices": [
+        { "label": "Check lobby cameras", "destination": "lobby-cameras" },
+        { "label": "Disable and call Maria", "destination": "disable-badge" }
+      ],
+      "isTerminal": false
+    },
+    {
+      "id": "check-locations",
+      "title": "Location Check",
+      "narrative": "You verify building access logs. Maria's badge was used at Server Room A (10:45), Elevator B lobby (11:17), and main entrance (11:22). After 11:22, no more scans.",
+      "evidence": [
+        { "label": "Main Entrance", "content": "11:22 PM" },
+        { "label": "Elevator B", "content": "11:17 PM" },
+        { "label": "Last Activity", "content": "Main entrance - 11:22 PM" }
+      ],
+      "choices": [
+        { "label": "Call Maria", "destination": "call-maria" },
+        { "label": "Assume lost outside", "destination": "assume-lost" }
+      ],
+      "isTerminal": false
+    },
+    {
+      "id": "wait-maria",
+      "title": "Waiting for Employee",
+      "narrative": "You call Maria. She explains she dropped her badge in the server room parking lot. Security sends a team to retrieve it.",
+      "evidence": [
+        { "label": "Badge Found", "content": "Server Room parking lot - 11:45 PM" },
+        { "label": "Status", "content": "Recovered, undamaged" },
+        { "label": "Reactivated", "content": "11:50 PM" }
+      ],
+      "choices": [],
+      "isTerminal": true
+    },
+    {
+      "id": "temp-access",
+      "title": "Temporary Access",
+      "narrative": "Since Maria needs immediate access to monitor the overnight build, you issue a temporary badge (TMP-9987) with building-wide access until 9:00 AM. Maria confirms receipt.",
+      "evidence": [
+        { "label": "Temp Badge", "content": "TMP-9987" },
+        { "label": "Access Level", "content": "Full building - until 09:00 AM" },
+        { "label": "Confirmation", "content": "Maria acknowledged - 11:55 PM" }
+      ],
+      "choices": [],
+      "isTerminal": true
+    },
+    {
+      "id": "lobby-cameras",
+      "title": "Lobby Footage",
+      "narrative": "The lobby cameras show Maria exiting main entrance at 11:22 PM. She walks to her car in the employee lot. No one approaches her. The camera loses sight at the parking lot edge.",
+      "evidence": [
+        { "label": "Exit Confirmation", "content": "Main entrance - 11:22 PM" },
+        { "label": "Vehicle", "content": "Toyota Camry (license: DEV-01)" },
+        { "label": "No Suspicious Activity", "content": "No contact, no vehicle approach" }
+      ],
+      "choices": [
+        { "label": "Check parking lot", "destination": "parking-check" },
+        { "label": "Disable and call", "destination": "disable-badge" }
+      ],
+      "isTerminal": false
+    },
+    {
+      "id": "parking-check",
+      "title": "Parking Lot Search",
+      "narrative": "Physical security visits the parking lot. They find Maria's car but no badge on the ground. They check the vehicle and find it in the glove compartment. Maria must have placed it there before leaving.",
+      "evidence": [
+        { "label": "Found In", "content": "Glove compartment" },
+        { "label": "Security Finding", "content": "Badge in car, undamaged" },
+        { "label": "Time Found", "content": "11:50 PM" }
+      ],
+      "choices": [
+        { "label": "Reactivate badge", "destination": "reactivate" },
+        { "label": "Issue temporary anyway", "destination": "temp-access" }
+      ],
+      "isTerminal": false
+    },
+    {
+      "id": "call-maria",
+      "title": "Calling Maria",
+      "narrative": "You call Maria. She's at home, 15 minutes away. She hasn't checked her car yet. You ask her to look in the glove compartment and seat crevices.",
+      "evidence": [
+        { "label": "Maria Location", "content": "Home - 15 minutes away" },
+        { "label": "Last Known", "content": "Main entrance - 11:22 PM" },
+        { "label": "Action", "content": "Checking vehicle" }
+      ],
+      "choices": [
+        { "label": "Wait for her call", "destination": "wait-maria" },
+        { "label": "Issue temporary", "destination": "temp-access" }
+      ],
+      "isTerminal": false
+    },
+    {
+      "id": "assume-lost",
+      "title": "Assuming Outside",
+      "narrative": "Since the badge wasn't found in the building and Maria was the last person to have it, you proceed with the standard lost badge protocol: disable the badge, issue temporary access if needed, and schedule a review.",
+      "evidence": [
+        { "label": "Protocol", "content": "Lost badge standard procedure" },
+        { "label": "Badge Status", "content": "Disabled" },
+        { "label": "Follow-up", "content": "Scheduled for Monday review" }
+      ],
+      "choices": [],
+      "isTerminal": true
+    },
+    {
+      "id": "reactivate",
+      "title": "Badge Recovered",
+      "narrative": "Maria finds her badge in the glove compartment. Security reactivates it (DEV-4821). The incident is resolved. You document the false alarm in the security log.",
+      "evidence": [
+        { "label": "Reactivated", "content": "11:52 PM" },
+        { "label": "Location", "content": "Glove compartment" },
+        { "label": "Security Log", "content": "False alarm documented" }
+      ],
+      "choices": [],
+      "isTerminal": true
+    }
+  ]
+}

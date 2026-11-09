@@ -4,7 +4,7 @@
 
 An original, local-first browser application for small-team branching decision rehearsals. Created November 9, 2026 for **Kiroween 2026 — Resurrection**. GhostDeck revives the card-and-link interaction of HyperCard as modern, inspectable rehearsal stacks. It is not a HyperCard emulator and uses no Apple assets.
 
-[Open the app](https://tomhao10225101490.github.io/GhostDeck-Kiroween/)
+[Open the app](https://tomhao10225101490.github.io/GhostDeck-Kiroween/) · [Watch the 2:33 demo](https://youtu.be/hhzNAfLD_MM)
 
 ## Try a complete flow
 

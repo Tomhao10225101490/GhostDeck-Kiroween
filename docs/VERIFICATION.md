@@ -13,3 +13,9 @@ Actual Chrome checks:
 - Importing a deck with a null card returned “Card must be an object” and preserved the active rehearsal.
 
 Further browser/deployment checks are recorded as completed below; unperformed checks are not implied. There is no formal real-team usability study or claimed training efficacy. No production integration was tested or included.
+
+Additional actual checks:
+- The downloaded debrief JSON parsed successfully: three decisions, terminal status, exact choice labels and evidence-open flags `[true, false, false]`.
+- A valid test deck containing HTML-looking text and an `onerror` attribute displayed literally in play and author fields; the browser title remained unchanged.
+- Loaded the independent Lost Badge Access fixture successfully.
+- Public GitHub Pages returned HTTP 200 after the initial test-and-publish workflow.
